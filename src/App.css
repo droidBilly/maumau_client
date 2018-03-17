@@ -1,0 +1,19 @@
+body {
+  background-image: url('/images/wood.jpg');
+}
+
+.App {
+  text-align: center;
+}
+
+.handCards {
+  position: relative;
+  top: 220px;
+}
+
+
+
+img {
+  height: 200px;
+  width: 150px;
+}
