@@ -1,58 +1,85 @@
 import React, { PureComponent } from "react";
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCards } from "../actions/game";
 import { fetchGameCards } from "../actions/game";
 import "../App.css";
 
 class CardOnHand extends PureComponent {
+  componentWillMount() {
+    this.props.fetchCards(Number(this.props.match.params.id), 1);
+    this.props.fetchGameCards();
+  }
 
-
-  findPic(cardId) {
-    return this.props.gameCards.map((item, index) => {
+  renderActiveCard(cardId) {
+    return this.props.gameCards.map(item => {
       if (cardId === item.id) {
         return (
           <img
-            key={item}
+            key={item.id}
+            className={`card activeCard`}
             src={`/cards/${item.value}_of_${item.suits}.png`}
-            alt="something"
+            alt="card"
           />
         );
       }
     });
   }
 
-  componentWillMount() {
-
-    this.props.fetchCards(Number(this.props.match.params.id), 1);
-    this.props.fetchGameCards()
-
+  renderHandCard(cardId, status) {
+    let active = this.props.gameCards[this.props.cards.active - 1];
+    return this.props.gameCards.map(item => {
+      if (cardId === item.id) {
+        if (this.validCard(cardId, active) === true) {
+          return (
+            <button>
+              <img
+                key={item.id}
+                className={`card ${status}`}
+                src={`/cards/${item.value}_of_${item.suits}.png`}
+                alt="card"
+              />
+            </button>
+          );
+        }
+        return (
+          <img
+            key={item.id}
+            className={`card ${status}`}
+            src={`/cards/${item.value}_of_${item.suits}.png`}
+            alt="card"
+          />
+        );
+      }
+    });
   }
 
-  renderCards() {
-    return this.findPic(this.props.cards.active)
+  validCard(cardId, active) {
+    let hand = this.props.gameCards[cardId - 1];
+    if (hand.value === active.value || hand.suits === active.suits) {
+      return true;
+    }
   }
-
 
   render() {
     return (
       <div>
-        {console.log('CARDS   ' + this.props.cards.active)}
         <div className="container">
-          {this.renderCards()}
+          {this.renderActiveCard(this.props.cards.active)}
         </div>
         <div className="handCards">
-        <p >My cards</p>
-        {this.props.cards.player1 && this.props.cards.player1.map( item => {
-          return this.findPic(item)
-        })}
+          <p>My cards</p>
+          {this.props.cards.player1 &&
+            this.props.cards.player1.map(card => {
+              return this.renderHandCard(card, "handCard");
+            })}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     cards: state.cards,
     gameCards: state.gameCards,
