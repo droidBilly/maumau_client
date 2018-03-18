@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
-import CardOnHand from '../components/CardOnHand'
-
+import CardOnHand from "../components/CardOnHand";
 
 class Game extends PureComponent {
   render() {

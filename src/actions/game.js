@@ -5,6 +5,7 @@ const baseUrl = 'http://localhost:4003'
 export const FETCH_CARDS_ID = 'FETCH_CARDS_ID'
 export const CREATE_GAME = "CREATE_GAME"
 export const FETCH_CARDS = "FETCH_CARDS"
+export const FETCH_GAMES = "FETCH_GAMES"
 
 export const fetchGameCards = (cards) => (dispatch) => {
   request
@@ -26,6 +27,17 @@ export const fetchCards = (gameId, userId) => (dispatch) => {
     .catch(err => alert(err))
 }
 
+export const fetchGames = () => (dispatch) => {
+  request
+    .get(`${baseUrl}/game`)
+    .then(response => dispatch({
+      type: FETCH_GAMES,
+      payload: response.body
+    }))
+    .catch(err => alert(err))
+}
+
+
 export const createGame = (userId) => (dispatch) => {
   request
     .post(`${baseUrl}/game`)
@@ -36,3 +48,14 @@ export const createGame = (userId) => (dispatch) => {
     }))
     .catch(err => alert(err))
 }
+
+export const createNewGame = (userId) => (dispatch) => {
+  request
+    .post(`${baseUrl}/game`)
+    .send({userId : userId})
+    .then(response => dispatch({
+      type: CREATE_GAME,
+      payload: response.body
+    }))
+    .catch(err => alert(err))
+  }

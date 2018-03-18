@@ -1,17 +1,20 @@
 import React, { PureComponent } from "react";
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { connect } from "react-redux";
 import { fetchCards } from "../actions/game";
 import { fetchGameCards } from "../actions/game";
 import "../App.css";
 
 class CardOnHand extends PureComponent {
+
+
   findPic(cardId) {
     return this.props.gameCards.map((item, index) => {
       if (cardId === item.id) {
         return (
           <img
             key={item}
-            src={`cards/${item.value}_of_${item.suits}.png`}
+            src={`/cards/${item.value}_of_${item.suits}.png`}
             alt="something"
           />
         );
@@ -20,15 +23,23 @@ class CardOnHand extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.fetchCards(10, 1);
-    this.props.fetchGameCards();
+
+    this.props.fetchCards(Number(this.props.match.params.id), 1);
+    this.props.fetchGameCards()
+
   }
+
+  renderCards() {
+    return this.findPic(this.props.cards.active)
+  }
+
 
   render() {
     return (
       <div>
+        {console.log('CARDS   ' + this.props.cards.active)}
         <div className="container">
-          {this.findPic(this.props.cards.active)}
+          {this.renderCards()}
         </div>
         <div className="handCards">
         <p >My cards</p>
@@ -41,10 +52,11 @@ class CardOnHand extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cards: state.cards,
-    gameCards: state.gameCards
+    gameCards: state.gameCards,
+    games: state.games
   };
 };
 
