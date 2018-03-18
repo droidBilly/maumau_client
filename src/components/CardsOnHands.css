@@ -1,3 +1,6 @@
+.card {
+  box-shadow: 3px 3px 3px black;
+}
 .activeCard {
   width: 160px;
   margin: 30px;

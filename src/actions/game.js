@@ -1,5 +1,5 @@
 import * as request from 'superagent'
-import { FETCH_CARDS, CREATE_GAME, FETCH_CARD_IDS } from "./types";
+import { FETCH_CARDS, CREATE_GAME, FETCH_CARD_IDS, FETCH_GAMES } from "./types";
 
 const baseUrl = 'http://localhost:4003'
 
@@ -32,4 +32,14 @@ export const createNewGame = (userId) => (dispatch) => {
       payload: response.body
     }))
     .catch(err => alert(err))
+  }
+
+  export const fetchGames = () => (dispatch) => {
+    request
+      .get(`${baseUrl}/games`)
+      .then(response => dispatch({
+        type: FETCH_GAMES,
+        payload: response.body
+      }))
+      .catch(err => alert(err))
   }
