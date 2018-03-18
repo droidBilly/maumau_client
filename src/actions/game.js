@@ -6,6 +6,7 @@ export const FETCH_CARDS_ID = 'FETCH_CARDS_ID'
 export const CREATE_GAME = "CREATE_GAME"
 export const FETCH_CARDS = "FETCH_CARDS"
 export const FETCH_GAMES = "FETCH_GAMES"
+export const JOIN_GAME = "JOIN_GAME"
 
 export const fetchGameCards = (cards) => (dispatch) => {
   request
@@ -58,4 +59,15 @@ export const createNewGame = (userId) => (dispatch) => {
       payload: response.body
     }))
     .catch(err => alert(err))
+  }
+
+  export const joinGame = (gameId, userId) => (dispatch) => {
+    request
+      .put(`${baseUrl}/game/${gameId}/join`)
+      .send ({userId : userId})
+      .then(response => dispatch({
+        type: JOIN_GAME,
+        payload: response.body
+      }))
+      .catch(err => alert(err))
   }

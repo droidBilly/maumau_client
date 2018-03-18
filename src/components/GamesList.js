@@ -1,14 +1,22 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { fetchGames } from '../actions/game'
+import { fetchGames, joinGame } from '../actions/game'
 import {Link} from 'react-router-dom'
 import NewGameButton from './NewGameButton'
 
 
+
 class GamesList extends PureComponent {
+
+
 
   componentWillMount() {
     this.props.fetchGames()
+  }
+
+  handleClick = (gameId) => (e) => {
+    this.props.joinGame(gameId, 2)
+
   }
 
     render() {
@@ -24,10 +32,12 @@ class GamesList extends PureComponent {
             </tr>
           </thead>
           <tbody>
-           { games.map(game => (<tr key={game.id}>
+           { games.map(game => (<tr key={game.gameId}>
              <td>Game {game.gameId}</td>
              <td>{game.player1}</td>
-             <Link to={ `/games/${game.gameId}` }><button>Join</button></Link>
+             <td>
+             <Link to={`/games/${game.gameId}`}><button onClick={this.handleClick(game.gameId)}>Join</button></ Link>
+             </td>
            </tr>)) }
          </tbody>
        </table>
@@ -45,4 +55,4 @@ const mapStateToProps = function(state) {
 
 
 
-export default connect(mapStateToProps, { fetchGames })(GamesList)
+export default connect(mapStateToProps, { fetchGames, joinGame })(GamesList)

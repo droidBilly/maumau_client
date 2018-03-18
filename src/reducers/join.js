@@ -1,8 +1,10 @@
-import { FETCH_GAMES} from "../actions/game";
+import { JOIN_GAME } from "../actions/game";
+
+
 
 export default function(state = [], { type, payload } = {}) {
   switch (type) {
-    case FETCH_GAMES:
+    case JOIN_GAME:
       return payload;
     default:
         return state;
