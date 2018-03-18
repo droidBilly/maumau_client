@@ -26,7 +26,7 @@ export const fetchCards = (gameId, userId) => (dispatch) => {
 export const createNewGame = (userId) => (dispatch) => {
   request
     .post(`${baseUrl}/games`)
-    .send(userId)
+    .send({userId : userId})
     .then(response => dispatch({
       type: CREATE_GAME,
       payload: response.body
