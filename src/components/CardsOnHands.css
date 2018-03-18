@@ -1,12 +1,12 @@
 .card {
-  box-shadow: 3px 3px 3px black;
+  box-shadow: 2px 2px 2px black;
 }
 .activeCard {
-  width: 160px;
+  width: 210px;
   margin: 30px;
 }
 
 .handCard {
-  width: 120px;
+  width: 170px;
   margin: 10px;
 }
