@@ -1,5 +1,5 @@
 import * as request from 'superagent'
-import { FETCH_CARDS, CREATE_GAME, FETCH_CARD_IDS, FETCH_GAMES, JOIN_GAME } from "./types";
+import { FETCH_CARDS, CREATE_GAME, FETCH_CARD_IDS, FETCH_GAMES, JOIN_GAME, SET_CARD } from "./types";
 
 const baseUrl = 'http://localhost:4003'
 
@@ -47,9 +47,20 @@ export const createNewGame = (userId) => (dispatch) => {
   export const joinGame = (gameId, userId) => (dispatch) => {
     request
       .put(`${baseUrl}/games/${gameId}/join`)
-      .send({userId : userId})
+      .send({userId_to_player2 : userId})
       .then(response => dispatch({
         type: JOIN_GAME,
+        payload: response.body
+      }))
+      .catch(err => alert(err))
+  }
+
+  export const setCard = (cardId, gameId, userId) => (dispatch) => {
+    request
+      .put(`${baseUrl}/games/${gameId}`)
+      .send({userId : userId})
+      .then(response => dispatch({
+        type: SET_CARD,
         payload: response.body
       }))
       .catch(err => alert(err))

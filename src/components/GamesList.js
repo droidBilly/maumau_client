@@ -20,8 +20,7 @@ class GamesList extends PureComponent {
   }
 
   handleClick = (gameId) => e => {
-    //Theoretical this will take -> this.props.user.id
-    this.props.joinGame(gameId, 2)
+    this.props.joinGame(gameId, this.props.currentUser.userId)
   }
 
   render() {
@@ -34,6 +33,8 @@ class GamesList extends PureComponent {
               <th>Game Id</th>
               <th>Enemy</th>
               <th>join</th>
+
+
             </tr>
           </thead>
           <tbody>
@@ -52,6 +53,7 @@ class GamesList extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
+    currentUser : state.currentUser,
     games: state.games
   }
 }

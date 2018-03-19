@@ -6,11 +6,12 @@ import { createNewGame } from '../actions/game'
 class NewGameButton extends PureComponent {
 
   handleClick = () => {
-    //Theoretical this will take -> this.props.user.id
-    this.props.createNewGame(1)
+    console.log(this.props.currentUser)
+    this.props.createNewGame(this.props.currentUser.userId)
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <button className="NewGameButton" onClick={this.handleClick}>
         New Game
@@ -19,12 +20,13 @@ class NewGameButton extends PureComponent {
   }
 }
 
-// This is needed as we will have a user state
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.user
-//   }
-// }
+// TODO: This is needed as we will have a user state
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser
+  }
+}
 
 // replace null with mapStateToProps
-export default connect(null, { createNewGame })(NewGameButton)
+
+export default connect(mapStateToProps, { createNewGame })(NewGameButton)
