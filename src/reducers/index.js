@@ -1,11 +1,19 @@
-import cards from './cards'
-import gameCards from './gameCards'
-import games from './games'
-import join from './join'
+import cards from "./cards";
+import gameCards from "./gameCards";
+import games from "./games";
+import join from "./join";
+import users from "./users";
+import login from "./login";
+import currentUser from "./currentUser";
+import signup from "./signup";
 
 export default {
   cards,
   gameCards,
   games,
-  join
-}
+  join,
+  users,
+  login,
+  currentUser,
+  signup
+};

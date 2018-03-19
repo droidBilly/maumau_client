@@ -1,6 +1,7 @@
 import * as request from 'superagent'
+import {baseUrl} from '../constants'
 
-const baseUrl = 'http://localhost:4003'
+
 
 export const FETCH_CARDS_ID = 'FETCH_CARDS_ID'
 export const CREATE_GAME = "CREATE_GAME"
@@ -20,7 +21,7 @@ export const fetchGameCards = (cards) => (dispatch) => {
 
 export const fetchCards = (gameId, userId) => (dispatch) => {
   request
-    .get(`${baseUrl}/game/${gameId}/${userId}`)
+    .get(`${baseUrl}/games/${gameId}/${userId}`)
     .then(response => dispatch({
       type: FETCH_CARDS,
       payload: response.body
@@ -30,7 +31,7 @@ export const fetchCards = (gameId, userId) => (dispatch) => {
 
 export const fetchGames = () => (dispatch) => {
   request
-    .get(`${baseUrl}/game`)
+    .get(`${baseUrl}/games`)
     .then(response => dispatch({
       type: FETCH_GAMES,
       payload: response.body
@@ -41,7 +42,7 @@ export const fetchGames = () => (dispatch) => {
 
 export const createGame = (userId) => (dispatch) => {
   request
-    .post(`${baseUrl}/game`)
+    .post(`${baseUrl}/games`)
     .send(userId)
     .then(response => dispatch({
       type: CREATE_GAME,
@@ -52,7 +53,7 @@ export const createGame = (userId) => (dispatch) => {
 
 export const createNewGame = (userId) => (dispatch) => {
   request
-    .post(`${baseUrl}/game`)
+    .post(`${baseUrl}/games`)
     .send({userId : userId})
     .then(response => dispatch({
       type: CREATE_GAME,
@@ -63,8 +64,8 @@ export const createNewGame = (userId) => (dispatch) => {
 
   export const joinGame = (gameId, userId) => (dispatch) => {
     request
-      .put(`${baseUrl}/game/${gameId}/join`)
-      .send ({userId : userId})
+      .put(`${baseUrl}/games/${gameId}/join`)
+      .send ({userid_to_player2 : userId})
       .then(response => dispatch({
         type: JOIN_GAME,
         payload: response.body

@@ -30,7 +30,7 @@ class CardOnHand extends PureComponent {
     let active = this.props.gameCards[this.props.cards.active - 1];
     return this.props.gameCards.map(item => {
       if (cardId === item.id) {
-        if (this.validCard(cardId, active) === true) {
+        if (this.validCard(cardId, active)) {
           return (
             <button>
               <img
@@ -70,7 +70,7 @@ class CardOnHand extends PureComponent {
         <div className="handCards">
           <p>My cards</p>
           {this.props.cards.player1 &&
-            this.props.cards.player1.map(card => {
+          this.props.cards.player1.map(card => {
               return this.renderHandCard(card, "handCard");
             })}
         </div>
