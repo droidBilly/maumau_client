@@ -26,23 +26,23 @@ class GamesList extends PureComponent {
   render() {
     return (
       <div className="GamesList">
-      <h1>All Games</h1>
+      <h2>All Games</h2>
         <table>
           <thead>
             <tr>
               <th>Game Id</th>
               <th>Enemy</th>
               <th>join</th>
-
-
             </tr>
           </thead>
           <tbody>
-            { this.props.games.map(game => (<tr key={game.id}>
+            { this.props.games.map(game => {
+              if (game.player2) return;
+              else return (<tr key={game.id}>
               <td>Game : {game.id}</td>
               <td>{game.player1}</td>
               <td><Link to={ `/games/${game.id}` }><button onClick={this.handleClick(game.id)}>JOIN</button></Link></td>
-            </tr>)) }
+            </tr>) }) }
           </tbody>
   			</table>
         <NewGameButton />
