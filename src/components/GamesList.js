@@ -20,7 +20,7 @@ class GamesList extends PureComponent {
   }
 
   handleClick = (gameId) => e => {
-    this.props.joinGame(gameId, this.props.currentUser.userId)
+    this.props.joinGame(gameId)
   }
 
   render() {

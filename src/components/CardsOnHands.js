@@ -8,8 +8,7 @@ import { setCard } from '../actions/game'
 class CardsOnHands extends PureComponent {
 
   componentWillMount() {
-    console.log(this.props.currentUser)
-    this.props.fetchCards(Number(this.props.match.params.id), this.props.currentUser.userId)
+    this.props.fetchCards(Number(this.props.match.params.id))
     this.props.fetchGameCards()
   }
 
