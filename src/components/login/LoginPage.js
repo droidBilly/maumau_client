@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {login} from '../../actions/users'
 import LoginForm from './LoginForm'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 
 class LoginPage extends PureComponent {
 	handleSubmit = (data) => {
@@ -21,6 +21,9 @@ class LoginPage extends PureComponent {
 				<LoginForm onSubmit={this.handleSubmit} />
 
         { this.props.error && <span style={{color:'red'}}>{this.props.error}</span> }
+				<br />
+				<p>Dont have an account yet? Go and</p>
+				<Link to='/signup'><button>Signup</button></Link>
 			</div>
 		)
 	}
