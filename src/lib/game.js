@@ -1,5 +1,1 @@
 
-playableCards(handCard, activeCard, allCards) {
-  
-
-}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCards } from "../actions/game";
 import { fetchGameCards } from "../actions/game";
+import { renderActiveCard, renderHandCard, validCard } from '../lib/game'
 import "../App.css";
 
 class CardOnHand extends PureComponent {
@@ -61,6 +62,7 @@ class CardOnHand extends PureComponent {
     }
   }
 
+
   render() {
     return (
       <div>
@@ -72,7 +74,10 @@ class CardOnHand extends PureComponent {
           {this.props.cards.player1 &&
           this.props.cards.player1.map(card => {
               return this.renderHandCard(card, "handCard");
-            })}
+            })} {this.props.cards.player2 &&
+              this.props.cards.player2.map(card => {
+                  return this.renderHandCard(card, "handCard");
+                })}
         </div>
       </div>
     );

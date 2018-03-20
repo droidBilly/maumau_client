@@ -1,30 +1,29 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { fetchGames, joinGame } from '../actions/game'
-import {Link} from 'react-router-dom'
-import NewGameButton from './NewGameButton'
-
-
+import { fetchGames, joinGame } from "../actions/game";
+import { Link } from "react-router-dom";
+import NewGameButton from "./NewGameButton";
 
 class GamesList extends PureComponent {
-
-
-
   componentWillMount() {
-    this.props.fetchGames()
-  }
+    this.props.fetchGames();
+    }
 
-  handleClick = (gameId) => (e) => {
-    this.props.joinGame(gameId, 2)
 
-  }
+  handleClick = gameId => e => {
+    this.props.joinGame(gameId);
+  };
 
-    render() {
-      const { games } = this.props;
-        return (
-          <div>
-           <h1>All games</h1>
-           <table>
+  render() {
+    const { games, users, } = this.props;
+
+
+
+
+    return (
+      <div>
+        <h1>All games</h1>
+        <table>
           <thead>
             <tr>
               <th>Game Id</th>
@@ -33,28 +32,31 @@ class GamesList extends PureComponent {
             </tr>
           </thead>
           <tbody>
-           { games.map(game => (<tr key={game.id}>
-             <td>Game {game.id}</td>
-             <td>{game.player1}</td>
-             <td>{game.player2}</td>
-             <td>
-             <Link to={`/games/${game.id}`}><button onClick={this.handleClick(game.id)}>Join</button></ Link>
-             </td>
-           </tr>)) }
-         </tbody>
-       </table>
-       <NewGameButton />
-     </div>
-   )
- }
+            {games.map(game => (
+              <tr key={game.id}>
+                <td>Game {game.id}</td>
+                <td>{game.player1}</td>
+                <td>{game.player2}</td>
+                <td>
+                  <Link to={`/games/${game.id}`}>
+                    <button onClick={this.handleClick(game.id)}>Join</button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <NewGameButton />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = function(state) {
   return {
-    games: state.games
+    games: state.games,
+    users: state.currentUser
   };
 };
 
-
-
-export default connect(mapStateToProps, { fetchGames, joinGame })(GamesList)
+export default connect(mapStateToProps, { fetchGames, joinGame })(GamesList);
