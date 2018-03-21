@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 import { fetchGameCards, fetchCards , setCard } from "../../actions/game";
 import { getUser } from "../../actions/users"
 import "../../App.css";
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import Typography from "material-ui/Typography";
+import Card, { CardActions, CardContent } from "material-ui/Card";
+
 
 class CardOnHand extends PureComponent {
 
@@ -92,21 +97,26 @@ class CardOnHand extends PureComponent {
 
   render() {
     return (
+
       <div>
+      <CardContent>
+      <Paper class="outer-paper">
         <div className="container">
           {this.renderActiveCard(this.props.cards.active)}
         </div>
-        <div className="handCards">
+        <Typography color="textSecondary">
           <p>My cards</p>
           { this.props.users &&
            this.renderPlayerCard(this.props.users.id)
          }
-        </div>
+        </Typography>
         <div>
           <Link to={`/games`}>
-            <button className="NewGameButton">Go Back</button>
+            <Button color="primary"  variant="raised" className="NewGameButton">Go Back</Button>
           </Link>
         </div>
+        </Paper>
+        </CardContent>
       </div>
     );
   }
