@@ -1,15 +1,23 @@
 import React, { PureComponent } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {BrowserRouter as  Route,  Redirect, Link} from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchCards } from "../actions/game";
+import { fetchCards , setCard } from "../actions/game";
 import { fetchGameCards } from "../actions/game";
-import { renderActiveCard, renderHandCard, validCard } from '../lib/game'
+import { getUser } from "../actions/users"
+import { renderActiveCard, renderHandCard, validCard } from "../lib/game";
 import "../App.css";
 
 class CardOnHand extends PureComponent {
+
   componentWillMount() {
-    this.props.fetchCards(Number(this.props.match.params.id), 1);
+    this.props.getUser()
+    this.props.fetchCards(Number(this.props.match.params.id));
     this.props.fetchGameCards();
+
+  }
+
+  handleClick =(cardId, gameId) => e => {
+    this.props.setCard(cardId, gameId)
   }
 
   renderActiveCard(cardId) {
@@ -33,7 +41,7 @@ class CardOnHand extends PureComponent {
       if (cardId === item.id) {
         if (this.validCard(cardId, active)) {
           return (
-            <button>
+            <button onClick={this.handleClick(item.id, Number(this.props.match.params.id))}>
               <img
                 key={item.id}
                 className={`card ${status}`}
@@ -57,10 +65,31 @@ class CardOnHand extends PureComponent {
 
   validCard(cardId, active) {
     let hand = this.props.gameCards[cardId - 1];
-    if (hand.value === active.value || hand.suits === active.suits) {
+    if (hand.value === 'jack' || hand.value === active.value || hand.suits === active.suits) {
       return true;
     }
   }
+
+  renderPlayerCard(userId) {
+    if (!this.props.cards.player1) return;
+    console.log(userId, Number(this.props.cards.userid_to_player1))
+
+    if (userId === Number(this.props.cards.userid_to_player1)){
+        return (
+          this.props.cards.player1.map(card => {
+            return this.renderHandCard(card, "handCard");
+          })
+        )
+      }
+      else if (userId === Number(this.props.cards.userid_to_player2)) {
+        return (
+          this.props.cards.player2.map(card => {
+            return this.renderHandCard(card, "handCard");
+          }))
+      }
+      else return;
+  }
+
 
 
   render() {
@@ -71,13 +100,14 @@ class CardOnHand extends PureComponent {
         </div>
         <div className="handCards">
           <p>My cards</p>
-          {this.props.cards.player1 &&
-          this.props.cards.player1.map(card => {
-              return this.renderHandCard(card, "handCard");
-            })} {this.props.cards.player2 &&
-              this.props.cards.player2.map(card => {
-                  return this.renderHandCard(card, "handCard");
-                })}
+          { this.props.users &&
+           this.renderPlayerCard(this.props.users.id)
+         }
+        </div>
+        <div>
+          <Link to={`/games`}>
+            <button className="NewGameButton">Go Back</button>
+          </Link>
         </div>
       </div>
     );
@@ -88,10 +118,11 @@ const mapStateToProps = state => {
   return {
     cards: state.cards,
     gameCards: state.gameCards,
-    games: state.games
+    games: state.games,
+    users: state.users
   };
 };
 
-export default connect(mapStateToProps, { fetchCards, fetchGameCards })(
+export default connect(mapStateToProps, { fetchCards, fetchGameCards, setCard, getUser })(
   CardOnHand
 );

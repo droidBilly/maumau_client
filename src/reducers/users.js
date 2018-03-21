@@ -11,20 +11,14 @@ export default (state = null, {type, payload}) => {
         ...state,
         [payload.id]: payload
       }
-
-    case UPDATE_USER:
-      return {
-        ...state,
-        [payload.id]: payload
-      }
-
-    case UPDATE_USERS:
+  case UPDATE_USER:
+      return payload;
+  case UPDATE_USERS:
       return payload.reduce((users, user) => {
         users[user.id] = user
         return users
       }, {})
-
-    default:
+  default:
       return state
   }
 }

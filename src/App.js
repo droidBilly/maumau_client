@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import "./App.css";
-import Game from "./containers/game";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import GamesList from "./components/GamesList";
 import CardOnHand from "./components/CardOnHand";
 import LoginPage from './components/login/LoginPage'
 import SignupPage from './components/signup/SignupPage'
 import LogoutPage from './components/logout/LogoutPage'
+import createBrowserHistory from 'history/createBrowserHistory'
+import NavBar from './components/NavBar'
+
+export const history = createBrowserHistory()
 
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router >
+
         <div className="App">
-          <h1 className="App-title">MAU MAU</h1>
+          <NavBar />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/logout" component={LogoutPage} />
           <Route exact path="/signup" component={SignupPage} />

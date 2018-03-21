@@ -1,6 +1,7 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
 
+
 export const ADD_USER = 'ADD_USER'
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_USERS = 'UPDATE_USERS'
@@ -39,10 +40,10 @@ export const login = (email, password) => (dispatch) =>
     	}
     })
 
-export const signup = (email, password) => (dispatch) =>
+export const signup = ( email, password) => (dispatch) =>
 	request
 		.post(`${baseUrl}/users`)
-		.send({ firstName: email, lastName: email, email, password })
+		.send({ firstName: email , lastName: email, email, password })
 		.then(result => {
 			dispatch({
 				type: USER_SIGNUP_SUCCESS
@@ -59,6 +60,23 @@ export const signup = (email, password) => (dispatch) =>
 				console.error(err)
 			}
 		})
+
+export const getUser = () => (dispatch, getState) => {
+      const state = getState()
+      const jwt = state.currentUser.jwt
+
+      request
+        .get(`${baseUrl}/user`)
+        .set('Authorization', `Bearer ${jwt}`)
+        .then(result => {
+          dispatch({
+            type: UPDATE_USER,
+            payload: result.body
+          })
+        })
+        .catch(err => console.error(err))
+    }
+
 
 export const getUsers = () => (dispatch, getState) => {
   const state = getState()
