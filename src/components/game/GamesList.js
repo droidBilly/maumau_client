@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { fetchGames, joinGame} from "../actions/game";
-import { getUser } from '../actions/users'
+import { fetchGames, joinGame} from "../../actions/game";
+import { getUser } from '../../actions/users'
 import { Link } from "react-router-dom";
 import NewGameButton from "./NewGameButton";
 import { Redirect } from "react-router-dom";
-import { userId } from "../jwt";
+import { userId } from "../../jwt";
 import UserInfo from './UserInfo'
+
 
 class GamesList extends PureComponent {
   componentWillMount() {
@@ -96,11 +97,6 @@ class GamesList extends PureComponent {
           </table>
         </div>
         <NewGameButton />
-        <Link to={`/logout`}>
-          <button >
-            Logout
-          </button>
-        </Link>
       </div>
     );
   }

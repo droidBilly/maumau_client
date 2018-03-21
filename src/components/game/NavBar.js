@@ -29,7 +29,7 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-      
+
           <Typography variant="title" color="inherit" className={classes.flex}>
             MAU MAU GAME
           </Typography>

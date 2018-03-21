@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import GamesList from "./components/GamesList";
-import CardOnHand from "./components/CardOnHand";
+import GamesList from "./components/game/GamesList";
+import CardOnHand from "./components/game/CardOnHand";
 import LoginPage from './components/login/LoginPage'
 import SignupPage from './components/signup/SignupPage'
 import LogoutPage from './components/logout/LogoutPage'
 import createBrowserHistory from 'history/createBrowserHistory'
-import NavBar from './components/NavBar'
+import NavBar from './components/game/NavBar'
 
 export const history = createBrowserHistory()
 

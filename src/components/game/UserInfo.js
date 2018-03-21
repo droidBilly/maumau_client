@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import {getUsers} from '../actions/users'
+import {getUsers} from '../../actions/users'
 
 
 

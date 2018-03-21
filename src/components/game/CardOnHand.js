@@ -1,11 +1,9 @@
 import React, { PureComponent } from "react";
 import {BrowserRouter as  Route,  Redirect, Link} from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchCards , setCard } from "../actions/game";
-import { fetchGameCards } from "../actions/game";
-import { getUser } from "../actions/users"
-import { renderActiveCard, renderHandCard, validCard } from "../lib/game";
-import "../App.css";
+import { fetchGameCards, fetchCards , setCard } from "../../actions/game";
+import { getUser } from "../../actions/users"
+import "../../App.css";
 
 class CardOnHand extends PureComponent {
 
