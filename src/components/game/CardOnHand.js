@@ -8,6 +8,8 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from "material-ui/Typography";
 import Card, { CardActions, CardContent } from "material-ui/Card";
+import '../styles/CardsOnHand.css'
+import '../styles/GameButtons.css'
 
 
 class CardOnHand extends PureComponent {
@@ -29,7 +31,7 @@ class CardOnHand extends PureComponent {
         return (
           <img
             key={item.id}
-            className={`card activeCard`}
+            className="otherCards"
             src={`/cards/${item.value}_of_${item.suits}.png`}
             alt="card"
           />
@@ -47,7 +49,7 @@ class CardOnHand extends PureComponent {
             <button onClick={this.handleClick(item.id, Number(this.props.match.params.id))}>
               <img
                 key={item.id}
-                className={`card ${status}`}
+                className="validCard"
                 src={`/cards/${item.value}_of_${item.suits}.png`}
                 alt="card"
               />
@@ -57,7 +59,7 @@ class CardOnHand extends PureComponent {
         return (
           <img
             key={item.id}
-            className={`card ${status}`}
+            className= "otherCards"
             src={`/cards/${item.value}_of_${item.suits}.png`}
             alt="card"
           />
@@ -112,7 +114,7 @@ class CardOnHand extends PureComponent {
         </Typography>
         <div>
           <Link to={`/games`}>
-            <Button color="primary"  variant="raised" className="NewGameButton">Go Back</Button>
+            <Button color="primary"  variant="raised" className="button">Go Back</Button>
           </Link>
         </div>
         </Paper>

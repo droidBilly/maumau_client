@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {signup} from '../../actions/users'
 import SignupForm from './SignupForm'
 import {Redirect, Link} from 'react-router-dom'
+import Button from 'material-ui/Button'
+
 
 class SignupPage extends PureComponent {
 	handleSubmit = (data) => {
@@ -21,7 +23,7 @@ class SignupPage extends PureComponent {
 				<SignupForm onSubmit={this.handleSubmit} />
 				<p style={{color:'red'}}>{ this.props.signup.error }</p>
 
-				<div> <p>If you already have an account please login</p> <Link to="login"><button>Login</button></Link></div>
+				<div> <p>If you already have an account please login</p> <Link to="login"><Button color="primary"  variant="raised"  type="submit">Log In</Button></Link></div>
 			</div>
 		)
 	}
