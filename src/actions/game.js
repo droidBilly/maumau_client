@@ -9,6 +9,7 @@ export const FETCH_GAMES = "FETCH_GAMES";
 export const JOIN_GAME = "JOIN_GAME";
 export const USER_ID = "USER_ID";
 export const SET_CARD = "SET_CARD"
+export const GET_A_CARD = "GET_A_CARD"
 
 export const fetchGameCards = cards => dispatch => {
   request
@@ -95,6 +96,21 @@ export const setCard = (cardId, gameId) => (dispatch, getState) => {
     .send({cardId: cardId})
     .then(response => {
       dispatch({type: SET_CARD, payload:response.body})
+      history.go()
+
+    })
+    .catch(err => alert(err))
+}
+
+export const getACard = (gameId) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  request
+    .patch(`${baseUrl}/games/${gameId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => {
+      dispatch({type: GET_A_CARD, payload:response.body})
       history.go()
 
     })
