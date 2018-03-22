@@ -1,6 +1,6 @@
 import * as request from 'superagent'
 import { FETCH_CARDS, CREATE_GAME, FETCH_CARD_IDS, FETCH_GAMES, JOIN_GAME, SET_CARD } from "./types";
-
+import { history } from '../index';
 const baseUrl = 'http://localhost:4003'
 
 export const fetchGameCards = () => (dispatch) => {
@@ -34,10 +34,11 @@ export const createNewGame = (userId) => (dispatch, getState) => {
   request
     .post(`${baseUrl}/games`)
     .set('Authorization', `Bearer ${jwt}`)
-    .then(response => dispatch({
-      type: CREATE_GAME,
-      payload: response.body
-    }))
+    .then((response) => {
+      dispatch({type: CREATE_GAME, payload: response.body})
+      history.push(`/games/${response.body.id}`);
+      history.go()
+    })
     .catch(err => alert(err))
   }
 
@@ -62,17 +63,21 @@ export const createNewGame = (userId) => (dispatch, getState) => {
     request
       .put(`${baseUrl}/games/${gameId}/join`)
       .set('Authorization', `Bearer ${jwt}`)
-      .then(response => dispatch({
-        type: JOIN_GAME,
-        payload: response.body
-      }))
+      .then(response => {
+        dispatch({type: JOIN_GAME, payload: response.body})
+        history.go()
+      })
       .catch(err => alert(err))
   }
 
-  export const setCard = (cardId, gameId, userId) => (dispatch) => {
+  export const setCard = (cardId, gameId) => (dispatch, getState) => {
+    const state = getState()
+    const jwt = state.currentUser.jwt
+
     request
-      .put(`${baseUrl}/games/${gameId}`)
-      .send({userId : userId})
+      .patch(`${baseUrl}/games/${gameId}`)
+      .set('Authorization', `Bearer ${jwt}`)
+      .send({cardId: cardId})
       .then(response => dispatch({
         type: SET_CARD,
         payload: response.body

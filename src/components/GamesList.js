@@ -85,7 +85,8 @@ const mapStateToProps = (state) => {
     authenticated: state.currentUser !== null,
     userId : state.currentUser && userId(state.currentUser.jwt),
     currentUser : state.currentUser,
-    games: state.games
+    games: state.games,
+    newGame: state.newGame
   }
 }
 

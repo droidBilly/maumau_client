@@ -6,6 +6,7 @@ import currentUser from './currentUser'
 import login from './login'
 import signup from './signup'
 import users from './users'
+import newGame from './newGame'
 
 export default {
   cards,
@@ -15,5 +16,6 @@ export default {
   currentUser,
   login,
   signup,
-  users
+  users,
+  newGame
 }

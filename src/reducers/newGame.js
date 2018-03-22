@@ -1,10 +1,8 @@
-import { FETCH_CARDS, SET_CARD } from '../actions/types'
+import { CREATE_GAME } from '../actions/types'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
-    case FETCH_CARDS:
-      return payload
-    case SET_CARD:
+    case CREATE_GAME:
       return payload
     default :
       return state

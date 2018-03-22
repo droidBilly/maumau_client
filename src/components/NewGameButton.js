@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import './NewGameButton.css'
 import { createNewGame } from '../actions/game'
+import { Redirect } from 'react-router-dom'
 
 class NewGameButton extends PureComponent {
 
   handleClick = () => {
-    console.log(this.props.currentUser)
-    this.props.createNewGame(this.props.currentUser.userId)
+    this.props.createNewGame()
   }
 
   render() {
@@ -20,13 +20,11 @@ class NewGameButton extends PureComponent {
   }
 }
 
-// TODO: This is needed as we will have a user state
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    newGame: state.newGame
   }
 }
-
-// replace null with mapStateToProps
 
 export default connect(mapStateToProps, { createNewGame })(NewGameButton)

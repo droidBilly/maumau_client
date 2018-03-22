@@ -12,8 +12,8 @@ class CardsOnHands extends PureComponent {
     this.props.fetchGameCards()
   }
 
-  handleClick = (cardId, gameId, userId) => e => {
-    this.props.setCard(cardId, gameId, userId)
+  handleClick = (cardId, gameId,) => e => {
+    this.props.setCard(cardId, gameId)
   }
 
   renderActiveCard(cardId) {
@@ -30,7 +30,7 @@ class CardsOnHands extends PureComponent {
       if (cardId === item.id) {
         if (this.validCard(cardId, active)) {
           return (
-            <button onClick={this.handleClick(item.id, this.props.match.params.id, this.props.currentUser.id)}>
+            <button onClick={this.handleClick(item.id, Number(this.props.match.params.id))}>
               <img
                 key={item.id}
                 className={`card ${status}`}
@@ -54,7 +54,7 @@ class CardsOnHands extends PureComponent {
 
   validCard(cardId, active) {
     let hand = this.props.gameCards[cardId-1]
-    if (hand.value === active.value || hand.suits === active.suits) {
+    if (hand.value === active.value || hand.suits === active.suits || hand.value === 'jack') {
       return true
     }
   }
@@ -62,6 +62,9 @@ class CardsOnHands extends PureComponent {
   render() {
     return (
       <div className="CardsOnHands">
+      { this.props.cards.cards_on_hand &&
+        <img className='stack' scr={`/cards/${this.props.cards.cards_on_hand.length}.png`} alt='stack' />
+      }
       {this.renderActiveCard(this.props.cards.active)}
       <p>Handcards</p>
       { this.props.cards.cards_on_hand &&
