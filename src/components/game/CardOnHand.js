@@ -33,8 +33,8 @@ class CardOnHand extends PureComponent {
       this.props.cards.player2.length === 0
     ) {
       if (
-        this.props.cards.player1.length === 0 &&
-        this.props.cards.userid_to_player1 === userId
+        (this.props.cards.player1.length === 0) &&
+        (Number(this.props.cards.userid_to_player1) === userId)
       ) {
         return (
           <div>
@@ -43,8 +43,8 @@ class CardOnHand extends PureComponent {
           </div>
         );
       } else if (
-        this.props.cards.player2.length === 0 &&
-        Number(this.props.cards.userid_to_player2) === userId
+        (this.props.cards.player2.length === 0 )&&
+        (Number(this.props.cards.userid_to_player2) === userId)
       ) {
         return (
           <div>
@@ -175,7 +175,9 @@ class CardOnHand extends PureComponent {
             </div>
             <Typography color="textSecondary">
               <p>My cards</p>
-              {this.props.cards.player1 && this.isWinner(this.props.users.id)}
+              {this.props.users &&
+               this.props.cards.player1 &&
+               this.isWinner(this.props.users.id)}
               {this.props.users && this.renderPlayerCard(this.props.users.id)}
             </Typography>
             <div>
