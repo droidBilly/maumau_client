@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import {BrowserRouter as  Route,  Redirect, Link} from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchGameCards, fetchCards , setCard } from "../../actions/game";
+import { fetchGameCards, fetchCards , setCard, getACard } from "../../actions/game";
 import { getUser } from "../../actions/users"
 import "../../App.css";
 import Button from 'material-ui/Button'
@@ -23,6 +23,10 @@ class CardOnHand extends PureComponent {
 
   handleClick =(cardId, gameId) => e => {
     this.props.setCard(cardId, gameId)
+  }
+
+  handleClickOnStack =(gameId) => e => {
+    this.props.getACard(gameId)
   }
 
   renderActiveCard(cardId) {
@@ -75,7 +79,6 @@ class CardOnHand extends PureComponent {
     } else if ( this.props.users.id == this.props.cards.userid_to_player2) {
       var player = "player2";
     }
-    console.log(player, this.props.cards.status)
     if (
       (hand.value === "jack" ||
       hand.value === active.value ||
@@ -106,12 +109,13 @@ class CardOnHand extends PureComponent {
 
   renderBackCards() {
     return (
-      <img
-        key={this.props.cards.stack}
-        className="cardBack"
-        src={`/card_back/${this.props.cards.stack.length}.png`}
-        alt="card"
-      />
+      <button className="cardBack" onClick={this.handleClickOnStack(Number(this.props.match.params.id))}>
+        <img
+          key={this.props.cards.stack}
+          src={`/card_back/${this.props.cards.stack.length}.png`}
+          alt="card"
+        />
+      </button>
     );
   }
 
@@ -154,6 +158,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchCards, fetchGameCards, setCard, getUser })(
+export default connect(mapStateToProps, { fetchCards, fetchGameCards, setCard, getUser, getACard })(
   CardOnHand
 );
