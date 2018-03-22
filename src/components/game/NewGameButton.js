@@ -14,6 +14,7 @@ class NewGameButton extends PureComponent {
       <div>
         <Paper class="outer-paper">
           <Button
+            style={{backgroundColor: "#B22222"}}
             color="primary"
             variant="raised"
             className="NewGameButton"

@@ -23,7 +23,7 @@ class SignupPage extends PureComponent {
 				<SignupForm onSubmit={this.handleSubmit} />
 				<p style={{color:'red'}}>{ this.props.signup.error }</p>
 
-				<div> <p>If you already have an account please login</p> <Link to="login"><Button color="primary"  variant="raised"  type="submit">Log In</Button></Link></div>
+				<div> <p>If you already have an account please login</p> <Link to="login"><Button style={{backgroundColor: "#B22222"}} color="primary"  variant="raised"  type="submit">Log In</Button></Link></div>
 			</div>
 		)
 	}

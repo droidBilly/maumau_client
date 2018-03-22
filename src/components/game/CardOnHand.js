@@ -70,14 +70,23 @@ class CardOnHand extends PureComponent {
 
   validCard(cardId, active) {
     let hand = this.props.gameCards[cardId - 1];
-    if (hand.value === 'jack' || hand.value === active.value || hand.suits === active.suits) {
+    if (this.props.users.id == this.props.cards.userid_to_player1) {
+      var player = "player1";
+    } else if ( this.props.users.id == this.props.cards.userid_to_player2) {
+      var player = "player2";
+    }
+    console.log(player, this.props.cards.status)
+    if (
+      (hand.value === "jack" ||
+      hand.value === active.value ||
+      hand.suits === active.suits ) && player === this.props.cards.status
+    ) {
       return true;
     }
   }
 
   renderPlayerCard(userId) {
     if (!this.props.cards.player1) return;
-    console.log(userId, Number(this.props.cards.userid_to_player1))
 
     if (userId === Number(this.props.cards.userid_to_player1)){
         return (
@@ -95,13 +104,25 @@ class CardOnHand extends PureComponent {
       else return;
   }
 
-
+  renderBackCards() {
+    return (
+      <img
+        key={this.props.cards.stack}
+        className="cardBack"
+        src={`/card_back/${this.props.cards.stack.length}.png`}
+        alt="card"
+      />
+    );
+  }
 
   render() {
     return (
 
       <div>
       <CardContent>
+      {this.props.cards.stack &&
+        this.renderBackCards()
+      }
       <Paper class="outer-paper">
         <div className="container">
           {this.renderActiveCard(this.props.cards.active)}
@@ -114,7 +135,7 @@ class CardOnHand extends PureComponent {
         </Typography>
         <div>
           <Link to={`/games`}>
-            <Button color="primary"  variant="raised" className="button">Go Back</Button>
+            <Button style={{backgroundColor: "#B22222"}} color="primary"  variant="raised" className="button">Go Back</Button>
           </Link>
         </div>
         </Paper>
