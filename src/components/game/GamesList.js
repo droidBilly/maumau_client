@@ -11,7 +11,7 @@ import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import Card, { CardActions, CardContent } from "material-ui/Card";
 import Typography from "material-ui/Typography";
-import "../styles/GameList.css"
+import "../styles/GameList.css";
 
 class GamesList extends PureComponent {
   componentWillMount() {
@@ -66,7 +66,8 @@ class GamesList extends PureComponent {
                                 <Link to={`/games/${game.id}`}>
                                   <Button
                                     size="small"
-                                    onClick={this.handleClick(game.id)}>
+                                    onClick={this.handleClick(game.id)}
+                                  >
                                     Join Game
                                   </Button>
                                 </Link>
