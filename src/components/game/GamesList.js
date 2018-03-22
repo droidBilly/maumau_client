@@ -33,6 +33,7 @@ class GamesList extends PureComponent {
     return (
       <div>
         <div>
+          <UserInfo />
           <Card key={games.id} className="game-card">
             <CardContent>
               <Typography variant="headline" component="h2">

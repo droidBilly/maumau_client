@@ -27,7 +27,7 @@ function ButtonAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar style={{ backgroundColor: "#B22222" }} position="static">
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.flex}>
             MAU MAU GAME

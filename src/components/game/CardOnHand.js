@@ -74,17 +74,29 @@ class CardOnHand extends PureComponent {
     let hand = this.props.gameCards[cardId - 1];
     if (this.props.users.id == this.props.cards.userid_to_player1) {
       var player = "player1";
-    } else if ( this.props.users.id == this.props.cards.userid_to_player2) {
+    } else if (this.props.users.id == this.props.cards.userid_to_player2) {
       var player = "player2";
     }
     if (
       (hand.value === "jack" ||
-      hand.value === active.value ||
-      hand.suits === active.suits )&& player === this.props.cards.status
+        hand.value === active.value ||
+        hand.suits === active.suits) &&
+      player === this.props.cards.status
     ) {
-      console.log('PLAYERRRRR   ' + player, this.props.cards.status)
+      console.log("PLAYERRRRR   " + player, this.props.cards.status);
       return true;
     }
+  }
+
+  renderBackCards() {
+    return (
+      <img
+        key={this.props.cards.stack}
+        className="cardBack"
+        src={`/card_back/${this.props.cards.stack.length}.png`}
+        alt="card"
+      />
+    );
   }
 
   renderPlayerCard(userId) {
@@ -105,27 +117,24 @@ class CardOnHand extends PureComponent {
   render() {
     return (
       <div>
-        {this.props.cards.stack && (
-          <img
-            key={this.props.cards.id}
-            className="stack"
-            scr={`/card_back/${this.props.cards.stack.length}.png`}
-            alt="stack"
-          />
-        )}
         <CardContent>
+          {this.props.cards.stack && this.renderBackCards()}
           <Paper class="outer-paper">
             <div className="container">
               {this.renderActiveCard(this.props.cards.active)}
             </div>
-
             <Typography color="textSecondary">
               <p>My cards</p>
               {this.props.users && this.renderPlayerCard(this.props.users.id)}
             </Typography>
             <div>
               <Link to={`/games`}>
-                <Button color="primary" variant="raised" className="button">
+                <Button
+                  style={{ backgroundColor: "#B22222" }}
+                  color="primary"
+                  variant="raised"
+                  className="button"
+                >
                   Go Back
                 </Button>
               </Link>

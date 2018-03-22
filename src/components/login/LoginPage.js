@@ -22,7 +22,7 @@ class LoginPage extends PureComponent {
         {this.props.error && (
           <span style={{ color: "red" }}>{this.props.error}</span>
         )}
-        <div> <p>If you are not register yet please SignUp</p> <Link to="signup"><Button color="primary"  variant="raised"  type="submit">Sign In</Button></Link></div>
+        <div> <p>If you are not register yet please SignUp</p> <Link to="signup"><Button style={{backgroundColor: "#B22222"}} color="primary"  variant="raised"  type="submit">Sign In</Button></Link></div>
       </div>
     );
   }

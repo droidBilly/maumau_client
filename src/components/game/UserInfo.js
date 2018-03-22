@@ -13,7 +13,6 @@ class UserInfo extends PureComponent {
   render() {
     return (
       <div>
-      {console.log(this.props.users.firsName)}
       </div>
     );
   }

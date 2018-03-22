@@ -74,7 +74,7 @@ export const joinGame = gameId => (dispatch, getState) => {
   const jwt = state.currentUser.jwt;
 
   request
-    .put(`${baseUrl}/games/${gameId}/join`)
+    .patch(`${baseUrl}/games/${gameId}/join`)
     .set("Authorization", `Bearer ${jwt}`)
     .then(response => {
       dispatch({ type: JOIN_GAME, payload: response.body })

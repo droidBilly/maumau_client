@@ -25,3 +25,10 @@
   -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
   box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
+
+.cardBack {
+  width: 220px;
+  height: 250px;
+  position: absolute;
+  left: 80px;  
+}
