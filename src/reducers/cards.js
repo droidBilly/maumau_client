@@ -1,4 +1,4 @@
-import {FETCH_CARDS, SET_CARD, GET_A_CARD } from "../actions/game";
+import {FETCH_CARDS, SET_CARD, GET_A_CARD} from "../actions/game";
 
 export default function(state = [], { type, payload } = {}) {
   switch (type) {

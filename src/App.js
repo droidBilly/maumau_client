@@ -14,7 +14,7 @@ export const history = createBrowserHistory()
 class App extends Component {
   render() {
     return (
-      <Router >
+      <Router>
 
         <div className="App">
           <NavBar />

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { BrowserRouter as Route, Redirect, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   fetchGameCards,
@@ -11,7 +11,7 @@ import { getUser } from "../../actions/users";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
-import Card, { CardActions, CardContent } from "material-ui/Card";
+import { CardContent } from "material-ui/Card";
 import "../styles/CardsOnHand.css";
 import "../styles/GameButtons.css";
 import "../../App.css";
@@ -29,7 +29,7 @@ class CardOnHand extends PureComponent {
 
   isWinner(userId) {
     if (
-      this.props.cards.player1.length === 0 ||
+       this.props.cards.player1.length === 0 ||
       this.props.cards.player2.length === 0
     ) {
       if (
@@ -40,6 +40,16 @@ class CardOnHand extends PureComponent {
           <div>
             <h1>Well Done!!</h1>
             <p>You are the winner!</p>
+            <Link to={`/games`}>
+              <Button
+                style={{ backgroundColor: "#B22222" }}
+                color="primary"
+                variant="raised"
+                className="button"
+              >
+                Play another game
+              </Button>
+            </Link>
           </div>
         );
       } else if (
@@ -50,6 +60,16 @@ class CardOnHand extends PureComponent {
           <div>
             <h1>Well Done!!</h1>
             <p>You are the winner!</p>
+            <Link to={`/games`}>
+              <Button
+                style={{ backgroundColor: "#B22222" }}
+                color="primary"
+                variant="raised"
+                className="button"
+              >
+                Play another game
+              </Button>
+            </Link>
           </div>
         );
       } else {

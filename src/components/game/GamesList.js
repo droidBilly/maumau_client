@@ -8,7 +8,6 @@ import { Redirect } from "react-router-dom";
 import { userId } from "../../jwt";
 import UserInfo from "./UserInfo";
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
 import Card, { CardActions, CardContent } from "material-ui/Card";
 import Typography from "material-ui/Typography";
 import "../styles/GameList.css";
