@@ -1,0 +1,45 @@
+.validCard{
+  margin-bottom: 20px;
+  border: none;
+  background: none;
+  outline: 0;
+  box-shadow: none;
+  width: 150px;
+  height: 220px;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+
+
+}
+
+.otherCards {
+
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 150px;
+  height: 220px;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.cardBack {
+
+  position: absolute;
+  left: 40px;
+  top: 65px;
+  background: none;
+   color: inherit;
+   border: none;
+   padding: 0;
+   font: inherit;
+   cursor: pointer;
+   outline: inherit
+}
+.cardBackImg {
+  width: 200px;
+  height: 260px;
+}
